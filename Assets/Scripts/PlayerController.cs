@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
 	public float speed;
 	public bool gameActive;
 	public GameObject menuPanel;
+	public int health;
+	public int maxHealth;
+	public Slider healthBar;
+
 	private Rigidbody rb;
 
 	// Use this for initialization
@@ -36,6 +41,13 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
+	}
+
+	void OnTriggerEnter(Collider other) {
+		if (other.CompareTag ("Hazard")) {
+			health--;
+			healthBar.value = health;
+		}
 	}
 
 	public void StartGame() {
